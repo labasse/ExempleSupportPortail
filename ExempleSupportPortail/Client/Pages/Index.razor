@@ -1,9 +1,45 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Support - Accueil</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<section class="row" id="banner">
+    <div class="col-4"></div>
+    <div class="col-7 mt-5 mb-5 p-3 bg-light border rounded-3" style="--bs-bg-opacity: .5">
+        <h1>Besoin d'aide ?</h1>
+        <p>Notre support est là pour vous aider.</p>
+        <a class="btn btn-primary">Ouvrir un ticket</a>
+    </div>
+</section>
+<content>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-lg-3 mt-5 mb5">
+            <div class="col">
+                <h2 class="text-center"><span class="fs-1 material-symbols-outlined">edit_note</span><br />Formulaire en ligne</h2>
+                <p>Remplissez le formulaire en ligne en fournissant les détails de votre demande. Suivez ensuite l'avancement de votre demande.</p>
+            </div>
+            <div class="col">
+                <h2 class="text-center"><span class="fs-1 material-symbols-outlined">acute</span><br />Réponse rapide</h2>
+                <p>Vous recevrez une réponse rapide à votre demande via votre espace dédié. Si vous avez des questions supplémentaires, nous sommes à votre écoute.</p>
+            </div>
+            <div class="col">
+                <h2 class="text-center"><span class="fs-1 material-symbols-outlined">mood</span><br />Satisfaction garantie</h2>
+                <p>Nous nous engageons à offrir un service de qualité et à répondre à vos besoins grâce à un taux de résolution de 95% en moins d'un jour.</p>
+            </div>
+        </div>
+        <div class="row">
+            <h2>Solutions fréquentes</h2>
+            <dl>
+                <dt>Mise à jour </dt>
+                <dd> Vérifiez si votre appareil est compatible avec la dernière version de l'application et effectuez la mise à jour.</dd>
+                <dt>Téléchargement </dt>
+                <dd> Assurez-vous que votre connexion Internet est active et essayez de redémarrer votre appareil.</dd>
+                <dt>Chargement </dt>
+                <dd> Vérifiez si l'appareil est suffisamment chargé et essayez de réinitialiser l'application.</dd>
+                <dt>Connexion </dt>
+                <dd> Vérifiez si votre appareil est connecté à un réseau Wi-Fi sécurisé et essayez de réinitialiser la connexion.</dd>
+                <dt>Utilisation </dt>
+                <dd> Veuillez vérifier les informations d'utilisateur et les mots de passe et essayez de réinitialiser les paramètres.</dd>
+            </dl>
+        </div>
+    </div>
+</content>
