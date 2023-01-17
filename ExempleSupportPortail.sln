@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExempleSupportPortail.Server", "ExempleSupportPortail\Server\ExempleSupportPortail.Server.csproj", "{0400565D-4CDD-42AF-8F67-EED490FB6B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExempleSupportPortail.Server", "ExempleSupportPortail\Server\ExempleSupportPortail.Server.csproj", "{0400565D-4CDD-42AF-8F67-EED490FB6B23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExempleSupportPortail.Client", "ExempleSupportPortail\Client\ExempleSupportPortail.Client.csproj", "{B570985F-98C1-44A5-AAD4-C1B3427B4B10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExempleSupportPortail.Client", "ExempleSupportPortail\Client\ExempleSupportPortail.Client.csproj", "{B570985F-98C1-44A5-AAD4-C1B3427B4B10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExempleSupportPortail.Shared", "ExempleSupportPortail\Shared\ExempleSupportPortail.Shared.csproj", "{829FFC02-9B11-4B12-80DE-96FCDCD45131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExempleSupportPortail.Shared", "ExempleSupportPortail\Shared\ExempleSupportPortail.Shared.csproj", "{829FFC02-9B11-4B12-80DE-96FCDCD45131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

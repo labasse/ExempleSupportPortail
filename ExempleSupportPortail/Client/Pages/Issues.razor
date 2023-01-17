@@ -1,0 +1,64 @@
+﻿@page "/issues"
+
+<content>
+    <div class="container">
+        <div class="row row-cols-1">
+            <div class="col mt-3">
+                <h3>Nouvelle demande</h3>
+
+                <form>
+                    <div class="col-sm-10 col-md-8 col-lg-6">
+                        <label for="area" class="form-label">Domaine</label>
+                        <select class="form-select fon" id="area">
+                            <option value="IT">Informatique</option>
+                            <option value="Facilities">Services généraux</option>
+                            <option value="HR">Ressources Humaines</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-10 col-md-8 col-lg-6">
+                        <label for="subject" class="form-label">Sujet</label>
+                        <input type="email" class="form-control" id="subject" placeholder="Objet de votre demande" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" class="form-control" placeholder="Décrivez votre problème." />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button type="reset" class="btn">Annuler</button>
+                </form>
+
+                <h3 class="mt-3">Vos tickets</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col" class="text-center">Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>05/01/23</td>
+                            <td>Problème d'imprimante (IT)</td>
+                            <td class="text-center"><span class="badge bg-danger">En attente</span></td>
+                        </tr>
+                        <tr>
+                            <td>15/12/22</td>
+                            <td>Fournitures de bureau (Facilities)</td>
+                            <td class="text-center"><span class="badge bg-warning">En cours</span></td>
+                        </tr>
+                        <tr>
+                            <td>02/12/22</td>
+                            <td>Demande de congés (RH)</td>
+                            <td class="text-center"><span class="badge bg-success">Fermé</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</content>
+
+@code {
+
+}
