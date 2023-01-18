@@ -7,6 +7,10 @@ namespace ExempleSupportPortail.Server.Controllers
     [ApiController]
     public class AreasController : ControllerBase
     {
+        /// <summary>
+        /// Get all areas
+        /// </summary>
+        /// <returns>List of areas with title.</returns>
         [HttpGet]
         public IEnumerable<Area> Get([FromServices] SupportContext sc)
             => sc.Areas;        
