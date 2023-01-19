@@ -1,4 +1,7 @@
 ﻿@page "/issues"
+@using ExempleSupportPortail.Shared;
+
+@inject HttpClient http
 
 <content>
     <div class="container">
@@ -9,11 +12,20 @@
                 <form>
                     <div class="col-sm-10 col-md-8 col-lg-6">
                         <label for="area" class="form-label">Domaine</label>
+                        @if(areas is null)
+                        {
+                            <select class="form-select fon" id="area" disabled>
+                            </select>
+                        }
+                        else
+                        {
                         <select class="form-select fon" id="area">
-                            <option value="IT">Informatique</option>
-                            <option value="Facilities">Services généraux</option>
-                            <option value="HR">Ressources Humaines</option>
+                            @foreach(var area in areas) 
+                            {
+                            <option>@area.Title</option>
+                            }                            
                         </select>
+                        }
                     </div>
                     <div class="col-sm-10 col-md-8 col-lg-6">
                         <label for="subject" class="form-label">Sujet</label>
@@ -37,21 +49,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>05/01/23</td>
-                            <td>Problème d'imprimante (IT)</td>
-                            <td class="text-center"><span class="badge bg-danger">En attente</span></td>
-                        </tr>
-                        <tr>
-                            <td>15/12/22</td>
-                            <td>Fournitures de bureau (Facilities)</td>
-                            <td class="text-center"><span class="badge bg-warning">En cours</span></td>
-                        </tr>
-                        <tr>
-                            <td>02/12/22</td>
-                            <td>Demande de congés (RH)</td>
-                            <td class="text-center"><span class="badge bg-success">Fermé</span></td>
-                        </tr>
+                        @if (issues is null)
+                        {
+                            <tr><td colspan=3>Chargement en cours...</td></tr>
+                        }
+                        else
+                        {
+                            @foreach (var issue in issues)
+                            {
+                                <tr>
+                                    <td>@issue.DateCreated.ToShortDateString()</td>
+                                    <td>@issue.Subject</td>
+                                    <td class="text-center"><span class="badge bg-@issue.StatusCssClass()">@issue.Status</span></td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
@@ -60,5 +72,14 @@
 </content>
 
 @code {
+    private IEnumerable<Area>? areas = null;
+    private IEnumerable<IssueDto>? issues = null;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.WhenAll(
+            Task.Run(async () => areas = await http.GetFromJsonAsync<IEnumerable<Area>>("api/areas")),
+            Task.Run(async () => issues = await http.GetFromJsonAsync<IEnumerable<IssueDto>>("api/issues"))
+        );
+    }
 }
