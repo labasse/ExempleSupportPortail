@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  APPSERVICE_RESOURCE: wf3support-staging
+  PROJECT_FOLDER: ./ExempleSupportPortail/Server
+
 jobs:
   build:
 
@@ -26,12 +30,18 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Set database parameters
+      run: sed -i "s/<dbpwd>/${{ secrets.AZURE_SQL_PASSWORD }}/" ${{ env.PROJECT_FOLDER}}/appsettings.json
+    - name: Update Database
+      run: |
+        dotnet tool install --global dotnet-ef
+        dotnet ef database update --project ${{ env.PROJECT_FOLDER}} -- --environment Staging
     - name: Publish
       run: dotnet publish -c Release -o ./myapp
     - name: Deploy
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: wf3support-staging
+        app-name: ${{ env.APPSERVICE_RESOURCE }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} 
         package: ./myapp
     
