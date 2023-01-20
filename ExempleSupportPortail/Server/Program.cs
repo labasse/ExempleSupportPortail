@@ -1,11 +1,16 @@
 using ExempleSupportPortail.Server;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<SupportContext>(
+    options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddSwaggerGen(c => {
@@ -14,12 +19,6 @@ builder.Services.AddSwaggerGen(c => {
         AppContext.BaseDirectory,
         $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"
     ));
-});
-builder.Services.AddSingleton(services => {
-    var sc = new SupportContext();
-
-    sc.Initialize();
-    return sc;
 });
 
 var app = builder.Build();

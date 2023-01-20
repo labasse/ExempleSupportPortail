@@ -1,6 +1,7 @@
 ﻿using ExempleSupportPortail.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExempleSupportPortail.Server.Controllers
 {
@@ -10,6 +11,10 @@ namespace ExempleSupportPortail.Server.Controllers
     {
         [HttpGet]
         public IEnumerable<IssueDto> Get([FromServices] SupportContext sc)
-            => sc.Issues.Select(issue => new IssueDto(issue));
+            => sc.Issues
+                .Include(issue => issue.User)
+                .Include(issue => issue.Area)
+                .Include(issue => issue.Status)
+                .Select(issue => new IssueDto(issue));
     }
 }
