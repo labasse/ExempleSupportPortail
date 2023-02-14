@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@page "/authentication/{action}"
+
+@inject NavigationManager nav
+@inject IJSRuntime js
+@inject IConfiguration conf
+
+<h3>Authentication : @Action</h3>
+
+<RemoteAuthenticatorView Action="@Action">
+    <LogInFailed>
+        <div class="alert alert-danger" role="alert">
+            Echec de la connexion : @context
+        </div>
+    </LogInFailed>
+    <LogOut>
+        @{
+            var url = $"{conf["Auth0:Authority"]}/v2/logout?client_id={conf["Auth0:ClientId"]}&returnTo={nav.ToAbsoluteUri("/")}";
+
+            js.InvokeVoidAsync("sessionStorage.clear");
+            nav.NavigateTo(url);
+        }
+    </LogOut>
+</RemoteAuthenticatorView>
+
+@code {
+    [Parameter]
+    public required string Action { get; set; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender && Action == "login-callback")
+        {
+            nav.NavigateTo("/issues");
+        }
+    }
+}

@@ -9,20 +9,27 @@
                 <li class="nav-item"><NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Accueil</NavLink></li>
                 <li class="nav-item"><NavLink class="nav-link" href="/issues">Tickets</NavLink></li>                
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#">Inscription</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Connexion</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle material-symbols-outlined" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        account_circle
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Mon compte</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+            <AuthorizeView>
+                <NotAuthorized>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><NavLink class="nav-link" href="/authentication/login">Connexion</NavLink></li>
                     </ul>
-                </li>
-            </ul>
+               </NotAuthorized>
+               <Authorized>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle material-symbols-outlined" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                account_circle
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/issues">Mon compte</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/authentication/LogOut">Déconnexion</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </Authorized>
+            </AuthorizeView>
         </div>
     </div>
 </nav>

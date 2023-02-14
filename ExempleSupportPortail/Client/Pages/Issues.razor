@@ -1,6 +1,8 @@
 ﻿@page "/issues"
 @using ExempleSupportPortail.Shared;
 
+@attribute [Authorize]
+
 @inject HttpClient http
 
 <content>
