@@ -1,9 +1,11 @@
 ﻿@page "/issues"
 @using ExempleSupportPortail.Shared;
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 @attribute [Authorize]
 
 @inject HttpClient http
+@inject IHttpClientFactory httpFactory
 
 <content>
     <div class="container">
@@ -81,7 +83,19 @@
     {
         await Task.WhenAll(
             Task.Run(async () => areas = await http.GetFromJsonAsync<IEnumerable<Area>>("api/areas")),
-            Task.Run(async () => issues = await http.GetFromJsonAsync<IEnumerable<IssueDto>>("api/issues"))
+            Task.Run(async () =>
+            {
+                try
+                {
+                    var httpSec = httpFactory.CreateClient("PrivateApi");
+
+                    issues = await httpSec.GetFromJsonAsync<IEnumerable<IssueDto>>("api/issues");
+                }
+                catch(AccessTokenNotAvailableException e)
+                {
+                    e.Redirect();
+                }
+            })
         );
     }
 }
