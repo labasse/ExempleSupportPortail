@@ -4,6 +4,21 @@ namespace ExempleSupportPortail.Shared
 {
     public class Issue
     {
+        public bool ChangeStatus(int newStatusId, DateTime? dateClosed, string? comment)
+        {
+            if (DateClosed is not null && DateClosed < DateCreated)
+            {
+                return false;
+            }
+            StatusId = newStatusId;
+            DateClosed = dateClosed;
+            if (comment is not null)
+            {
+                Comment = comment;
+            }
+            return true;
+        }
+
         [Key]
         public int IdIssue { get; set; }
 

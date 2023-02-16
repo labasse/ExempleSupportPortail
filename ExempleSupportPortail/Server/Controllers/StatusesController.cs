@@ -8,8 +8,15 @@ namespace ExempleSupportPortail.Server.Controllers
     [ApiController]
     public class StatusesController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<Status> Get([FromServices] SupportContext sc)
+        /// <summary>
+        /// Get the issue status list.
+        /// </summary>
+        /// <remarks>Get the complete issue status list with no paging feature and no filter.</remarks>
+        /// <returns>A list of statuses.</returns>
+        /// <response code="200">Statuses successfully returned.</response>
+        [HttpGet(Name = nameof(GetAllStatuses))]
+        [ProducesResponseType(typeof(IEnumerable<Status>), StatusCodes.Status200OK)]
+        public IEnumerable<Status> GetAllStatuses([FromServices] SupportContext sc)
             => sc.Statuses;
     }
 }

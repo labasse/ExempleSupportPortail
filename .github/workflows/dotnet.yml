@@ -30,6 +30,8 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Set authorized API Key
+      run: sed -i "s/<apikey>/${{ secrets.AUTHORIZED_API_KEY }}/" ${{ env.PROJECT_FOLDER}}/appsettings.json
     - name: Set database parameters
       run: sed -i "s/<dbpwd>/${{ secrets.AZURE_SQL_PASSWORD }}/" ${{ env.PROJECT_FOLDER}}/appsettings.json
     - name: Update Database

@@ -89,7 +89,7 @@
                 {
                     var httpSec = httpFactory.CreateClient("PrivateApi");
 
-                    issues = await httpSec.GetFromJsonAsync<IEnumerable<IssueDto>>("api/issues");
+                    issues = await httpSec.GetFromJsonAsync<IEnumerable<IssueDto>>("api/me/issues");
                 }
                 catch(AccessTokenNotAvailableException e)
                 {

@@ -4,10 +4,14 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using ExempleSupportPortail.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton(_ =>
+    new ApiKeyManager(builder.Configuration.GetValue<Guid>("ApiKey"))
+);
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -47,7 +51,7 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.UseSwagger();
+app.UseSwagger(c => c.SerializeAsV2 = true);
 app.UseSwaggerUI(c => 
     c.SwaggerEndpoint(
         "/swagger/v1/swagger.json",
